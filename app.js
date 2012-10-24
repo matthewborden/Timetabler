@@ -1,6 +1,9 @@
 //<debug>
 //</debug>
 
+dateURL = ''; 
+dataURL = '';
+
 Date.prototype.addDays = function(days) {
     this.setDate(this.getDate() + days);
     return this;
@@ -122,6 +125,8 @@ if (parseData != null) {
     }
     return Day_Number;
 }
+
+
 
 Ext.application({
     name: 'Timetabler',

@@ -23,7 +23,7 @@ Ext.define('Timetabler.view.Viewport',{
 			},{
 				xtype:'DayList',
 				id:'Day',				grouped:true,
-				scrollable: true,				pinHeaders: true,                 itemTpl: new Ext.XTemplate('<div class="title">{ClassDescription} </div><div><em class="small">Period {PeriodNumber} in <bold>{Room}</bold></em>{[startup.calcTimeLeft(values)]}</div>', {
+				scrollable: true,				pinHeaders: true,                 itemTpl: new Ext.XTemplate('<div class="title">{ClassDescription} </div><div><em class="small">Period {PeriodNumber} in <bold>{Room}</bold> with {SchoolStaffCode}</em>{[startup.calcTimeLeft(values)]}</div>', {
                     timeTranslate: function (time) {
                         curTime = time.split(":")
                         if (curTime[0] > 12) {

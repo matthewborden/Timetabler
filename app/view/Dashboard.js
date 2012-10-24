@@ -21,7 +21,7 @@ Ext.define('Timetabler.view.Dashboard', {
                 grouped: false,
                 pinHeaders: false,
                 cls: 'todayList',
-                itemTpl: new Ext.XTemplate('<div class="title">{ClassDescription} </div><div><em class="small">Period {PeriodNumber} in <bold>{Room}</bold></em>{[startup.calcTimeLeft(values)]}</div>', {
+                itemTpl: new Ext.XTemplate('<div class="title">{ClassDescription} </div><div><em class="small">Period {PeriodNumber} in <bold>{Room}</bold> with {SchoolStaffCode}</em>{[startup.calcTimeLeft(values)]}</div>', {
                     timeTranslate: function (time) {
                         curTime = time.split(":")
                         if (curTime[0] > 12) {

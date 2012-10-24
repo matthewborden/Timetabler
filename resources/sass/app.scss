@@ -15,7 +15,7 @@ $base-gradient: 'matte';
 	-webkit-border-radius: 10px;
 	border-radius: 10px;
 	padding: 0 4px;
-	color: white;
+	color: white !important;
 	font-size: 10px;
 	background-color: #BEC6CA;
 	font-weight: bold;
@@ -27,6 +27,14 @@ $base-gradient: 'matte';
 .timetabler-dashboard-panel {
 	padding: 1em 0 0 0;
 }
+
+.x-list-grouped {
+	margin-bottom:15px;
+}
+.x-list-container{
+	margin-bottom:10px;
+}
+
 .todayList, .x-list{
 	background:none !important;
 }
@@ -44,6 +52,7 @@ $base-gradient: 'matte';
 	-webkit-border-bottom-right-radius: 0.4em !important;
 	border-top-right-radius: 0em !important;
 	border-width: 1px;
+	margin-bottom:10px !important;
 } 
 
 bold {
@@ -57,7 +66,7 @@ em.small {
 
 .round-box{
 	background: white;
-	margin: 0 13px 0 13px !important;
+	margin: 0 13px 10px 13px !important;
 	-webkit-border-radius: 5px;
 	min-height: 2.6em;
 	border: solid #DDD;
@@ -103,7 +112,6 @@ em.small {
 	font-size: 17px;
 	line-height: 17px;
 	font-weight: bold;
-	width: 65%;
 	em {
 		float: none;
 		display: inline;

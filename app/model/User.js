@@ -11,7 +11,8 @@ Ext.define('Timetabler.model.User', {
          {name: 'ClassCode', type: 'string'},
          {name: 'ClassDescription', type: 'string'},
          {name: 'StaffID', type: 'string'},
-        {name: 'Room', type: 'string'},      
+        {name: 'Room', type: 'string'},
+		{name: 'SchoolStaffCode', type: 'string'},
     ]
     }
 });
