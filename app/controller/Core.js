@@ -2,10 +2,12 @@ Ext.define('Timetabler.controller.Core', {
     extend: 'Ext.app.Controller',
 	indexArray:[],
     init: function () {
+		// setup for the object
 		tasks.load();
 		core = this;
     },
 	onBackButtonTap:function(){
+		// Manages the navigation system, had to write a system to keep track of the current page
 		var me = this;
 		me.changeView('back'); 
 		if(me.getIndex() == 0){
@@ -17,6 +19,7 @@ Ext.define('Timetabler.controller.Core', {
 		}
 	},
 	changeView:function(value){
+		// Back/Foward Left/Right
 		var me = this;
 		if (value == 'back'){
 			me.changeAnimation('right');
@@ -43,13 +46,15 @@ Ext.define('Timetabler.controller.Core', {
 	setView:function (value){
 		var me = this;
 		var curIndex = me.getIndex();
-		if (curIndex == undefined){ curIndex = 0;}
-		else {
-			curIndex = curIndex + 1;
+		if (value != core.indexArray[curIndex]){
+			if (curIndex == undefined){ curIndex = 0;}
+			else {
+				curIndex = curIndex + 1;
+			}
+			this.indexArray[curIndex] = value;
+			me.getViewport().setActiveItem(value);
+			me.setIndex(curIndex);
 		}
-		this.indexArray[curIndex] = value;
-		me.getViewport().setActiveItem(value);
-		me.setIndex(curIndex);
 	},
 	backView:function (value){
 		var me = this;
@@ -86,6 +91,7 @@ Ext.define('Timetabler.controller.Core', {
         periodStore.clearFilter();
         periodStore.filter("ClassCode", record.data.ClassCode);
 		curClassCode = record.data.ClassCode;
+		curDescription = record.data.ClassDescription;
         tasks.clearFilter();
         tasks.filter('ClassCode', curClassCode);
 		me.changeView('Period');
@@ -103,11 +109,11 @@ Ext.define('Timetabler.controller.Core', {
         this.init();
         if (localStorage.getItem("synID") == null) {
             me.getViewport().setActiveItem('SettingsPanel');
-        } else {
+        } else{
+		
             me.changeAnimation('left');
             me.setView('Dashboard');
-        }
-
+		}
     },
     onAddTaskButtonTap: function () {
 		var me = this;
@@ -151,11 +157,17 @@ Ext.define('Timetabler.controller.Core', {
 	onTaskSubmit:function () {
 		var me = this;
 		var form = me.getAddTaskPanel().getValues();
+		if (form.Title == '' || form.Content == ''){
+			alert('Error: Eields Empty');
+			return;
+		}
+
 		tasks.add({
 			Title: form.Title,
 			Content: form.Content,
 			Date: form.Date,
 			ClassCode: curClassCode,
+			ClassDescription: curDescription,
 		});
 		tasks.sync();
 		tasks.load();

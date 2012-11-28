@@ -1,8 +1,9 @@
 //<debug>
 //</debug>
 
-dateURL = ''; 
-dataURL = '';
+dateURL = 'date.json';
+dataURL = 'file.json?synID='; // keep the ?synID= on the end of the file.  //'https://intranet.trinity.vic.edu.au/timetable/getTimetable1.asp?synID=';
+usernameURL = 'username.json';
 
 Date.prototype.addDays = function(days) {
     this.setDate(this.getDate() + days);
@@ -135,12 +136,7 @@ Ext.application({
     views: ['SettingsPanel', 'Viewport'],
     models: ['User', 'Week','Favourites','Tasks'],
     stores: ['User', 'Week','Favourites','Tasks'],
-    icon: {
-        57: 'resources/icons/Icon.png',
-        72: 'resources/icons/Icon~ipad.png',
-        114: 'resources/icons/Icon@2x.png',
-        144: 'resources/icons/Icon~ipad@2x.png'
-    },
+    icon: 'resources/icons/Icon.png',
 
     phoneStartupScreen: 'resources/loading/Homescreen.jpg',
     tabletStartupScreen: 'resources/loading/Homescreen~ipad.jpg',

@@ -10,6 +10,7 @@ Ext.define('Timetabler.view.Dashboard', {
 			scrollable: false,
         }, {
             xtype: 'ClassesSingleClass',
+			itemTpl:  '{ClassCode} - {Title}',
             scrollable: false,
         },{
             xtype: 'container',

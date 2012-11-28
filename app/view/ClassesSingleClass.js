@@ -7,8 +7,7 @@ Ext.define('Timetabler.view.ClassesSingleClass', {
 		cls:'todayList',
 		disableSelection:true,
 		store:tasks,
-		itemSelector:'item',
-		itemTpl:  '{Title}',
+		itemSelector:'item'
 	}
 });
  

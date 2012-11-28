@@ -1,21 +1,25 @@
 ﻿Ext.define('Timetabler.controller.Startup', {
     extend: 'Ext.app.Controller',
     init: function () {
+		// Creates The App and checks if this is 
+		// the first time it is being used.
         startup = this;
 		Ext.create('Timetabler.view.Viewport');
         if (localStorage.getItem("synID") == null) {
             this.requestDayData();
         } else {
-            this.processData();
+			this.processData();
         }
 		
     },
     requestTermData: function () {
+		// Get the current Term
         var Data = JSON.parse(localStorage.getItem("responseTextDateData"));
         var Term = Data.Term;
         return Term;
     },
     calcTimeLeft: function (values) {
+		// calculate the time left in the period
         var dTime = new Date();
         var TimeNow = HMStoMin(dTime.getHours() + ":" + dTime.getMinutes() + ":00");
         var ClassEnd = HMStoMin(values.DefinitionTimeTo.toString());
@@ -27,24 +31,56 @@
         }
     },
     requestDayData: function () {
+		
+		/*
+		 * Code for preset username file
+		 * Function: To preset the username. 
+		 * Also: comment out core.js line 108,109,113 and the code below this comment.
+		 
+		 
+		 Ext.Ajax.request({
+			url: usernameURL,
+			success: function (response) {
+				localStorage.setItem("synID", response.responseText);
+				studentString = response.responseText;
+				
+				 Ext.Ajax.request({
+					url: 'date.json',
+					success: function (response) {
+						// process server response here
+						localStorage.setItem("responseTextDateData", response.responseText);
+						dateString = response.responseText;
+						
+						startup.requestData(true);
+					}
+				});
+			}
+		});
+		*/
+	
+		// Get the data for the Day Function and the expired function
         Ext.Ajax.request({
-            url: '/php/date.php',
+            url: 'date.json',
             success: function (response) {
                 // process server response here
                 localStorage.setItem("responseTextDateData", response.responseText);
+				dateString = response.responseText;
             }
         });
     },
     requestData: function (val) {
-        Ext.Ajax.request({
-            url: '/php/get.php?id=' + localStorage.getItem("synID"),
-            success: function (response) {
-                localStorage.setItem("responseTextTimeTableData", response.responseText);
-                if (val) {
-                    window.location.reload()
-                }
-            }
-        });
+		// Request the data
+		var Data = JSON.parse(dateString);
+		var Term = Data.Term;
+		curYear = new Date();
+		requestURL  = dataURL + studentString + '&room=0&year='+ Ext.Date.format(curYear,'Y') +'&term='+ Term +'&day='+ DayNumber()+ '&callType=student';
+		Ext.Ajax.request({
+			url: requestURL,
+			success: function (response) {
+				localStorage.setItem("responseTextTimeTableData", response.responseText);
+				window.location.reload();
+			}
+		});
     },
     processData: function () {
         if (navigator.onLine) {

@@ -19,14 +19,8 @@ Ext.define('Timetabler.view.SettingsPanel', {
                 if (thisForm.getValues()['synID'] == 0) {
                     alert("Please Enter a Student ID");
                 } else {
-                    localStorage.setItem("synID", thisForm.getValues()['synID']);
-                	Ext.Ajax.request({
-			            url: '/php/get.php?id=' + localStorage.getItem("synID"),
-			            success: function (response) {
-			                localStorage.setItem("responseTextTimeTableData", response.responseText);
-			           			                    window.location.reload()
-			            }
-			        });
+                    localStorage.setItem("synID", thisForm.getValues()['synID']);					var Data = JSON.parse(localStorage.getItem("responseTextDateData"));					var Term = Data.Term;
+                	curYear = new Date();					requestURL  = dataURL + localStorage.getItem("synID") + '&room=0&year='+ Ext.Date.format(curYear,'Y') +'&term='+ Term +'&day='+ DayNumber()+ '&callType=student';					Ext.Ajax.request({						url: requestURL,						success: function (response) {							localStorage.setItem("responseTextTimeTableData", response.responseText);							window.location.reload()													}					});
 				}
             }
         }]
